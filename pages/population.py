@@ -7,8 +7,7 @@ import plotly.express as px
 import folium
 import streamlit_folium
 import streamlit as st
-import plotly.graph_objects as go
-from plotly.subplots import make_subplots
+
 
 
 
