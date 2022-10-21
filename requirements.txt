@@ -1,0 +1,9 @@
+numpy
+pandas
+seaborn
+koreanize_matplotlib
+matplotlib.pyplot
+plotly.express
+folium
+streamlit
+streamlit_folium
