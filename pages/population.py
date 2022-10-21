@@ -79,8 +79,8 @@ gu_home = ['강동구', '강북구', '강서구', '관악구' ,'광진구', '구
 fig, axes = plt.subplots(1,2, figsize = (8,3))
 axes2 = axes.copy()
 
-y11 = compare_time[compare_time['자치구'] == '강남구'][['시간대','충전빈도수']]['충전빈도수']
-y12 = compare_time[compare_time['자치구'] == '강남구'][['시간대','20세 이상 생활인구수']]['20세 이상 생활인구수']
+y11 = compare_time[compare_time['자치구'] == '서초구'][['시간대','충전빈도수']]['충전빈도수']
+y12 = compare_time[compare_time['자치구'] == '서초구'][['시간대','20세 이상 생활인구수']]['20세 이상 생활인구수']
 
 axes[0].set_xlabel('시간대')
 axes[0].set_ylabel('충전빈도')
@@ -95,8 +95,8 @@ axes2[0].set_ylabel('생활인구수')
 axes2[0].plot(time_list, y12, color='g', label='생활인구', linewidth = '5')
 axes2[0].legend(loc='upper right')
 
-y21 = compare_time[compare_time['자치구'] == '성북구'][['시간대','충전빈도수']]['충전빈도수']
-y22 = compare_time[compare_time['자치구'] == '성북구'][['시간대','20세 이상 생활인구수']]['20세 이상 생활인구수']
+y21 = compare_time[compare_time['자치구'] == '강서구'][['시간대','충전빈도수']]['충전빈도수']
+y22 = compare_time[compare_time['자치구'] == '강서구'][['시간대','20세 이상 생활인구수']]['20세 이상 생활인구수']
 
 axes[1].set_xlabel('시간대')
 axes[1].set_ylabel('충전빈도')
