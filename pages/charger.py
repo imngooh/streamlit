@@ -9,13 +9,27 @@ from streamlit_folium import st_folium
 import streamlit as st
 import requests
 
+"""
+<어느 자치구 충전기가 부족한가?>
+
+- 전기차 등록 대수 추이 / 타연료 자동차 등록 대슈 추이 비교
+
+(새로 시각화 해야 함)
+
+- 평균 주유기 대수 대비 이용 자동차 대수 vs 충전기 개수 대비 전기차 충전 빈도
+"""
+
+
+
+
 # 페이지 설정
-st.set_page_config(
-    page_title="충전소와 전기차 간 비교",
-    page_icon="⚡",
-    layout="wide",
-    initial_sidebar_state= 'expanded'
-)
+# st.set_page_config(
+#     page_title="충전소와 전기차 간 비교",
+#     page_icon="⚡",
+#     layout="wide",
+#     initial_sidebar_state= 'expanded'
+# )
+
 
 # 2 전처리 데이터 읽어오기
 df = pd.read_parquet('https://github.com/cryptnomy/likelion-ai-s7-mid/blob/master/data/hypo_2.parqeut.gzip?raw=true')
@@ -60,10 +74,28 @@ df_gu_map = pd.merge(df_gu_map, gu_df)
 # 지도에 구획 추가
 geo_data = requests.get('https://raw.githubusercontent.com/cubensys/Korea_District/master/3_%EC%84%9C%EC%9A%B8%EC%8B%9C_%EC%9E%90%EC%B9%98%EA%B5%AC/%EC%84%9C%EC%9A%B8_%EC%9E%90%EC%B9%98%EA%B5%AC_%EA%B2%BD%EA%B3%84_2017.geojson').json()
 
+ee_car = pd.read_csv('https://raw.githubusercontent.com/cryptnomy/likelion-ai-s7-mid/master/data/seoul-any-gu-ev.csv', encoding = 'cp949')
+ee_car['시군구별'] = ee_car['시군구별'].str.replace('중 구', '중구')
+ee_car = ee_car[ee_car['연월별'] == '2021-12-31'][['시군구별','계']]
+ee_car_mount = pd.DataFrame(ee_car.groupby('시군구별')['계'].sum()).reset_index()
+ee_car_mount = ee_car_mount.rename(columns = {'시군구별' : '자치구'})
+ee_station = df.groupby('자치구')['충전소명'].nunique().copy()
+ee_station = pd.DataFrame(ee_station).reset_index()
+ee_station = ee_station.rename(columns = {'충전소명' : '충전소수'})
+ee_per = pd.merge(ee_car_mount,ee_station,on='자치구')
+ee_per = ee_per.rename(columns = {"계" : "자치구별 전기차 대수"})
+
+gu_charger = df.groupby(['자치구','충전소명'])[['급속충전기(대)','완속충전기(대)']].mean().groupby('자치구').sum().reset_index()
+gu_charger['총 충전기수'] = gu_charger['급속충전기(대)'] + gu_charger['완속충전기(대)']
+
+ee_per = pd.merge(ee_per , gu_charger)
+ee_per['충전기 당 전기차'] = ee_per['자치구별 전기차 대수'] / ee_per['총 충전기수']
+
+
 folium.Choropleth(
     geo_data = geo_data,
-    data = df_gu_map,
-    columns = ('자치구', '충전소명'),
+    data = ee_per,
+    columns = ('자치구', '충전기 당 전기차'),
     key_on="feature.properties.SIG_KOR_NM",
     fill_color = 'Blues',
     legend_name = '충전소 수',
@@ -84,8 +116,14 @@ for i, row in df_map.iterrows():
 
 st.markdown('# 한국전력공사 전기차 충전소 위치(서울특별시)')    
 st_map = st_folium(final_map, width = 1500)
-st.markdown('> 자치구 별 색상이 진할수록 충전기의 수가 많습니다.')
-# 차트 추가하려면 이런거 필요
+st.markdown('> 자치구 별 색상이 진할수록 충전기당 담당하는 전기차의 수가 많습니다.')
+
+fig , ax= plt.subplots(figsize = (6,3))
+sns.barplot(data=ee_per.sort_values("충전기 당 전기차", ascending= False), x="자치구", y="충전기 당 전기차", ci=None)
+
+st.pyplot(fig)
+
+# 지도에 차트 추가하려면 이런거 필요
 # Popup().add_child(
 #         folium.Vega(vis2, width=450, height=250)
 #     )

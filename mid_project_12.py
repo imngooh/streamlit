@@ -9,13 +9,24 @@ from streamlit_folium import st_folium
 import streamlit as st
 import requests
 
+"""# 메인 페이지
+
+### 주제에 대한 설명
+
+시각화 자료 + 주제
+"""
+
+
+
+
+
 # 페이지 설정
-st.set_page_config(
-    page_title="12걸지 마시조",
-    page_icon="💢",
-    layout="wide",
-    initial_sidebar_state= 'expanded'
-)
+# st.set_page_config(
+#     page_title="12걸지 마시조",
+#     page_icon="💢",
+#     layout="wide",
+#     initial_sidebar_state= 'expanded'
+# )
 
 # 제목 markdown
 st.markdown('# 💢12걸지마시조')
