@@ -180,12 +180,14 @@ plt.gca().axes.yaxis.set_visible(False)
 
 plt.tight_layout()
 st.pyplot(fig)
+with st.expander('전체 자치구 시각화 결과보기'):
+    st.image('https://github.com/imngooh/streamlit/raw/master/gu_time_popul_charge.png')
+    
 """
 서울시 모든 자치구를 시각화하여 분석한 결과, 상업지역과 주거지역이 명확히 나누어지는 모습을 보였다. 그 중 대표적인 두 곳의 그래프를 비교해보자.
-
-전체 자치구 시각화 자료는 여기서 다운받을 수 있다.
 """
-st.download_button('다운로드', data = 'https://github.com/imngooh/streamlit/raw/master/gu_time_popul_charge.png')
+\
+    
 # 상업지역 및 주거지역 비교
 st.markdown('#### 상업지역')
 """
