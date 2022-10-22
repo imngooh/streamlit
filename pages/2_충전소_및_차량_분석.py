@@ -9,6 +9,13 @@ from streamlit_folium import st_folium
 import streamlit as st
 import requests
 
+# 페이지 설정
+st.set_page_config(
+    page_title="충전소와 전기차 간 비교",
+    page_icon="⚡",
+    layout="wide",
+    initial_sidebar_state= 'expanded'
+)
 """
 <어느 자치구 충전기가 부족한가?>
 
@@ -19,16 +26,6 @@ import requests
 - 평균 주유기 대수 대비 이용 자동차 대수 vs 충전기 개수 대비 전기차 충전 빈도
 """
 
-
-
-
-# 페이지 설정
-# st.set_page_config(
-#     page_title="충전소와 전기차 간 비교",
-#     page_icon="⚡",
-#     layout="wide",
-#     initial_sidebar_state= 'expanded'
-# )
 
 
 # 2 전처리 데이터 읽어오기

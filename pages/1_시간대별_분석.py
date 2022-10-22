@@ -92,17 +92,6 @@ st.plotly_chart(fig)
 
 
 
-# 선택지 만들기
-st.sidebar.markdown('# 자치구 선택')
-selected_gu = st.sidebar.selectbox('name', list(df_1['자치구'].unique()))
-if bool(selected_gu):
-    selected_data = df_1[df_1['자치구'] == selected_gu]
-
-
-
-
-
-
 # 그래프 그리기 위한 변수 처리
 
 
@@ -116,7 +105,6 @@ gu_time = gu_time.reset_index().rename(columns = {'level_1' : '시간대'})
 gu_time = gu_time.rename(columns={0:"충전빈도수"})
 compare_time = pd.merge(data_gu_time, gu_time)
 gu_list = compare_time['자치구'].unique().tolist()
-selected_gu_time = compare_time[compare_time['자치구'] == selected_gu].set_index('시간대')
 
 
 
@@ -144,7 +132,7 @@ st.markdown('## 상업 및 주거지역 비교')
 
 # 비교 그래프
 plt.style.use('seaborn-paper')
-print(plt.style.available)
+# print(plt.style.available)
 fig, axes = plt.subplots(1,2, figsize = (8,3))
 axes2 = axes.copy()
 
@@ -203,14 +191,31 @@ st.markdown('#### 주거지역')
 
 st.markdown('### 결론')
 """
-> 
+> 생활인구가 야간시간대에 많은 주거지역의 경우 예상대로 야간 시간대 충전 빈도가 많았다.  그런데, 생활인구가 야간시간대에 적은 상업지역조차도 야간 시간대 충전 빈도가 훨씬 많았다.  
+> 이는 상업지역에 거주하는 사람들이 완속충전기를 사용해 야간에 주로 충전을 한다는 의미로 받아들일 수 있다.  
+>
+> 결국, 어느 지역에서든 사람들이 퇴근 후 야간 시간대에 충전을 하는경우가 많다는 것을 알아내었다. 그렇다면, 거주지 밀집 지역에서는 야간시간대에 충전 수요가 폭발적으로 증가할 것이다.
+
+
+우리는 이를 토대로,
+### 거주지 밀집 지역에서 저녁 및 야간 시간대에 전기차 충전소가 부족하다.
+라는 결론을 낼 수 있었다.
+
+
+---
+
     """
 
 
 st.markdown('### 자치구별 그래프 확인하기')
-st.markdown('> 왼쪽 사이드바에서 자치구를 선택하세요!')
+st.markdown('자치구를 선택하세요!')
 st.markdown('')
+# 선택지 만들기
 
+selected_gu = st.selectbox('name', list(df_1['자치구'].unique()))
+if bool(selected_gu):
+    selected_data = df_1[df_1['자치구'] == selected_gu]
+selected_gu_time = compare_time[compare_time['자치구'] == selected_gu].set_index('시간대')
 # 선택한 구 그리고, 주거지역인지 상업지역인지 표시
 # plotly 도전
 
@@ -235,9 +240,10 @@ locat = '주거지역' if selected_gu in gu_home else '상업지역'
 st.markdown(f'**{selected_gu}**는 **{locat}**입니다.')
 if locat =='주거지역' :
     st.markdown('**오전 및 오후** 시간대에 생활인구가 **적고**, **야간** 시간대에 **많습니다.**')
+    st.markdown(' 충전 빈도 역시 **오전 및 오후** 시간대에 **적고**, **야간** 시간대에 **많습니다.**')
 else :
     st.markdown('**오전 및 오후** 시간대에 생활인구가 **많고**, **야간** 시간대에 **적습니다.**')
-    
+    st.markdown('그러나 충전 빈도는 **오전 및 오후** 시간대에 **적고**, **야간** 시간대에 **많습니다.**')
     
     
     
