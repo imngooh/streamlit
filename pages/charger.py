@@ -104,20 +104,20 @@ folium.Choropleth(
 
 # 지도에 마커 추가
     
-for i, row in df_map.iterrows():
-    iframe = folium.IFrame('충전소명 : '+ row['충전소명'] + '<br>' +'급속충전기 : ' + str(row['급속충전기(대)']) + '<br>' + '완속충전기 : '+ str(row['완속충전기(대)']))
+for i, row in df_gu_map.iterrows():
+    iframe = folium.IFrame('자치구명 : '+ row['자치구'] + '<br>' +'급속충전기 : ' + str(row['급속충전기(대)']) + '<br>' + '완속충전기 : '+ str(row['완속충전기(대)']))
     popup = folium.Popup(iframe,min_width=200, max_width=300)
     
     folium.Circle([row['위도'],row['경도']],
-                  radius = 100,
+                  radius = 150,
                   color = 'red',
                   fill_color = 'crimson',
                   popup = popup).add_to(final_map)
-
 st.markdown('# 한국전력공사 전기차 충전소 위치(서울특별시)')    
 st_map = st_folium(final_map, width = 1500)
 st.markdown('> 자치구 별 색상이 진할수록 충전기당 담당하는 전기차의 수가 많습니다.')
 
+st.markdown('')
 fig , ax= plt.subplots(figsize = (6,3))
 sns.barplot(data=ee_per.sort_values("충전기 당 전기차", ascending= False), x="자치구", y="충전기 당 전기차", ci=None)
 
