@@ -188,7 +188,7 @@ fig = make_subplots(rows=1, cols=1, shared_xaxes=True,specs=[[{"secondary_y": Tr
 fig.add_trace(go.Bar(x=selected_gu_time.reset_index()['시간대'],y=selected_gu_time.reset_index()['충전빈도수'],
               name='충전수'))
 fig.add_trace(go.Scatter(x=selected_gu_time.reset_index()['시간대'],y=selected_gu_time.reset_index()['20세 이상 생활인구수'],
-              name='유동인구수'),secondary_y = True)
+              name='유동인구수', line = {'width' : 5}),secondary_y = True)
 
 fig.update_layout(
     title_text= f"<b>{selected_gu}<b> 시간대별 충전 빈도수 및 유동인구 수"
