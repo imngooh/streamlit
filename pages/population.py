@@ -8,16 +8,17 @@ import folium
 from streamlit_folium import st_folium
 import streamlit as st
 import requests
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 
 
 
-
-# st.set_page_config(
-#     page_title="유동인구와 충전 데이터 비교",
-#     page_icon="👨‍👩‍👧‍👦",
-#     layout="wide",
-#     initial_sidebar_state= 'expanded'
-# )
+st.set_page_config(
+    page_title="유동인구와 충전 데이터 비교",
+    page_icon="👨‍👩‍👧‍👦",
+    layout="wide",
+    initial_sidebar_state= 'expanded'
+)
 
 
 """
@@ -58,14 +59,37 @@ st.pyplot(fig0)
 
 # 완속 급속 충전수
 
-fig1, ax = plt.subplots()
+# fig1, ax = plt.subplots()
 
-plt.bar(time_list,df_2.groupby('충전구분')[time_list].sum().T.reset_index()['완속'],width = 0.2, label = '완속')
-plt.bar(np.array(time_list) +0.2,df_2.groupby('충전구분')[time_list].sum().T.reset_index()['급속'],width = 0.2,label = '급속')
+# plt.bar(time_list,df_2.groupby('충전구분')[time_list].sum().T.reset_index()['완속'],width = 0.2, label = '완속')
+# plt.bar(np.array(time_list) +0.2,df_2.groupby('충전구분')[time_list].sum().T.reset_index()['급속'],width = 0.2,label = '급속')
 
-plt.title('시간대별 완속, 급속 충전수 비교')
-plt.legend(loc ='best')
-st.pyplot(fig1)
+# plt.title('시간대별 완속, 급속 충전수 비교')
+# plt.legend(loc ='best')
+# st.pyplot(fig1)
+
+fig = make_subplots(rows=1, cols=1, shared_xaxes=True)
+fig.add_trace(go.Bar(x=time_list,y=df_2.groupby('충전구분')[time_list].sum().T.reset_index()['완속'],
+              name='완속충전수'))
+fig.add_trace(go.Bar(x=time_list,y=df_2.groupby('충전구분')[time_list].sum().T.reset_index()['급속'],
+              name='급속충전수'))
+
+fig.update_layout(
+    title_text= f"시간대별 급속 및 완속 충전 빈도수"
+)
+
+fig.update_xaxes(title_text="시간대")
+fig.update_yaxes(title_text="<b>충전 수</b>")
+
+
+st.plotly_chart(fig)
+
+
+
+
+
+
+
 
 
 # 선택지 만들기
@@ -159,8 +183,6 @@ st.markdown('> 왼쪽 사이드바에서 자치구를 선택하세요!')
 
 # 선택한 구 그리고, 주거지역인지 상업지역인지 표시
 # plotly 도전
-import plotly.graph_objects as go
-from plotly.subplots import make_subplots
 
 fig = make_subplots(rows=1, cols=1, shared_xaxes=True,specs=[[{"secondary_y": True}]])
 fig.add_trace(go.Bar(x=selected_gu_time.reset_index()['시간대'],y=selected_gu_time.reset_index()['충전빈도수'],
