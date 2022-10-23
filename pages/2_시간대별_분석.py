@@ -179,7 +179,7 @@ with st.expander('자치구 별 상업지역, 주거지역 구분 결과'):
         st.write(pd.Series(gu_home).rename('주거지역'))
     with col2 :
         '- 상업지역'
-        st.write(pd.Series(gu_home).rename('상업지역'))
+        st.write(pd.Series(gu_not_home).rename('상업지역'))
 
 """
 서울시 모든 자치구를 시각화하여 분석한 결과, 상업지역과 주거지역이 명확히 나누어지는 모습을 보였다. 그 중 대표적인 두 곳의 그래프를 비교해보자.
