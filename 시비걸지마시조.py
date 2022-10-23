@@ -134,7 +134,7 @@ with st.expander('서울특별시 내 충전기 지도로 살펴보기!') :
 st.image('https://s3.us-west-2.amazonaws.com/secure.notion-static.com/5575478b-24da-4767-98b2-4f9a77cc1053/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221022%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221022T171016Z&X-Amz-Expires=86400&X-Amz-Signature=ad0b565654a99571055aea8a10e3f337fb83aab3dbd22482adf30a9f9165093d&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22&x-id=GetObject')
 """
 - 서울특별시 자치구 별, 주유기 당 자동차 개수와 충전기 당 전기차 개수 비교 결과
-- 주유기 한 개가 담당하는 자동차의 개수가 월등히 많다.
+- 주유기 한 개가 담당하는 자동차의 개수 충전기가 담당하는 전기차보다 월등히 많다.
 - 그렇다면 전기차 충전기는 정말로 부족한 것일까? 단지 우려는 아닐까?
 
 
@@ -169,7 +169,7 @@ st.image('https://s3.us-west-2.amazonaws.com/secure.notion-static.com/5575478b-2
 """
 절대적인 개수로 보아도 전기차 충전소는 부족하다. 그러나 그렇게 심각한 정도는 아니다.
 
-그러나, 긴 충전시간으로 인한 충전 가능 시간대의 제약(오전 및 오후 일과 시간 내 불가능), 이로 인한 완속충전기의 사용 증가가 충전기 부족의 더 큰 원인임을 알 수 있었다.
+그러나, 긴 충전시간으로 인한 충전 가능 시간대의 제약(오전 및 오후 일과 시간 내 불가능)이 존재하고, 이로 인해 야간 시간대의 충전 집중 현상이 일어난다. 그런데 야간충전의 대부분은 충전에 시간이 오래 걸리는 완속충전기로 진행된다. 따라서 야간충전에서 많은 차를 충전하기 힘들다. 이러한 이유로 인해, 절대적인 수치에 비해 사용자들이 체감하는 실제 충전기 부족 문제는 더 심각함을 알 수 있었다.
 """
 
 '#### 제언'
