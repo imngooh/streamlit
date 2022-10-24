@@ -57,7 +57,7 @@ with st.expander('주유기 당 자동차 수 데이터프레임으로 보기'):
     oil_cc
 
 '주유기 당 자동차 수 및 충전기 당 전기차 수 비교'
-st.image('https://s3.us-west-2.amazonaws.com/secure.notion-static.com/e15e63a9-7d29-4ab9-a11e-88d3516706c9/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221022%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221022T183450Z&X-Amz-Expires=86400&X-Amz-Signature=1cbbbd7d99da045ee1c558f443f7c3cf9e7bffd92d1a2d014951fea2ce457782&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22&x-id=GetObject')
+st.image('https://s3.us-west-2.amazonaws.com/secure.notion-static.com/b1318299-7729-4107-ab7e-54d216d0404c/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221024%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221024T015205Z&X-Amz-Expires=86400&X-Amz-Signature=80348304a88d19bb00660d55bef8fc793b23388225ec84a4b7799736b1f21f85&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22&x-id=GetObject')
 with st.expander('주유기 및 충전기 당 차량 수 비교 데이터프레임'):
     fuel_ee
 
