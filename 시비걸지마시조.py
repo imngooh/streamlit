@@ -84,7 +84,7 @@ st.image('https://s3.us-west-2.amazonaws.com/secure.notion-static.com/b2343bc0-d
 with st.expander('🗺️서울특별시 내 충전기 지도로 살펴보기!') :
     st_map = folium_static(final_map)
     '배경 색상은 충전기 하나 당 담당하는 전기차 수를 의미합니다.'
-st.image('https://github.com/imngooh/mid_1_folium/raw/main/Untitled.png')
+st.image('https://github.com/imngooh/mid_1_folium/raw/main/%EC%A3%BC%EC%9C%A0%EC%86%8C%EC%B6%A9%EC%A0%84%EC%86%8C.png')
 """
 - 서울특별시 자치구 별, 주유기 당 자동차 개수와 충전기 당 전기차 개수 비교 결과
 - 주유기 한 개가 담당하는 자동차의 개수 충전기가 담당하는 전기차보다 월등히 많다.
